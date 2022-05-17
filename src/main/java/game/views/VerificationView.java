@@ -266,7 +266,7 @@ public class VerificationView implements GameView {
 
     private boolean sendVerificationCode() {
         String recipient = this.userEmail;
-        String sender = "gcbourdon@gmail.com";
+        String sender = "test@gmail.com";
 
         String host = "localhost";
 
