@@ -78,7 +78,7 @@ public class VerificationView implements GameView {
 
     private void createVerificationPanel(String userEmail) {
         verificationPanel = new JPanel();
-        verificationPanel.setPreferredSize(new Dimension(2000, 200));
+        verificationPanel.setPreferredSize(new Dimension(2000, 300));
         verificationPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 10));
 
         //padding labels
@@ -99,6 +99,11 @@ public class VerificationView implements GameView {
         emailVerificationLabel = new JLabel(String.format("Send a verification code to '%s' ?", userEmail));
         emailVerificationLabel.setPreferredSize(new Dimension(500, 50));
         emailVerificationLabel.setFont(new Font("Sans-serif", Font.PLAIN, 20));
+
+        //send button
+        sendButton = new JButton("send code");
+        sendButton.setPreferredSize(new Dimension(100, 30));
+        setSendButtonListener();
 
         createSendButtonPanel(); //create send button panel
         createCodePanel(); //create verification code panel
@@ -137,11 +142,11 @@ public class VerificationView implements GameView {
         JLabel padding = new JLabel();
         padding.setPreferredSize(new Dimension(1000, 30));
 
-        congratsMessage = new JLabel("Congratulations!");
+        congratsMessage = new JLabel("  Congratulations!");
         congratsMessage.setPreferredSize(new Dimension(200, 30));
         congratsMessage.setFont(new Font("Sans-serif", Font.BOLD, 20));
 
-        successMessage = new JLabel("Your account was successfully created");
+        successMessage = new JLabel("   Your account was successfully created");
         successMessage.setPreferredSize(new Dimension(300, 30));
         successMessage.setFont(new Font("Sans-serif", Font.PLAIN, 15));
 
@@ -168,11 +173,11 @@ public class VerificationView implements GameView {
 
     private void createCodePanel() {
         codePanel = new JPanel();
-        codePanel.setPreferredSize(new Dimension(2000, 80));
-        codePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
+        codePanel.setPreferredSize(new Dimension(2560, 300));
+        codePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         enterCodeLabel = new JLabel("enter code: ");
-        enterCodeLabel.setPreferredSize(new Dimension(100, 30));
+        enterCodeLabel.setPreferredSize(new Dimension(80, 30));
         enterCodeLabel.setFont(new Font("Sans-serif", Font.PLAIN, 15));
 
         verifyField = new JTextField(15);
