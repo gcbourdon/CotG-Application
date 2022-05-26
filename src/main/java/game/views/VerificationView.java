@@ -50,7 +50,6 @@ public class VerificationView implements GameView {
     //views
     private SignUpView signUpView;
 
-
     //user information
     String userEmail;
 
@@ -98,7 +97,7 @@ public class VerificationView implements GameView {
         //verify code label
         emailVerificationLabel = new JLabel(String.format("Send a verification code to '%s' ?", userEmail));
         emailVerificationLabel.setPreferredSize(new Dimension(500, 50));
-        emailVerificationLabel.setFont(new Font("Sans-serif", Font.PLAIN, 20));
+        emailVerificationLabel.setFont(new Font("Sans-serif", Font.PLAIN, 15));
 
         //send button
         sendButton = new JButton("send code");

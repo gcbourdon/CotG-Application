@@ -2,6 +2,7 @@ package game.views;
 
 import game.GameView;
 import game.controllers.AppController;
+import game.models.User;
 import lombok.Data;
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +33,10 @@ public class LoginView implements GameView {
 
     //views
     private SignUpView signUpView;
+    private MainMenuView mainMenuView;
+
+    //data
+    private User user;
 
     private final int MAX_WIDTH = 2560;
 
@@ -41,6 +46,7 @@ public class LoginView implements GameView {
         this.mainPanel = mainPanel;
         this.mainController = mainController;
         this.mainController.setLoginView(this);
+        this.user = new User();
     }
 
     public void renderView() {
@@ -180,11 +186,16 @@ public class LoginView implements GameView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //TODO -> this gets triggered when the user presses the enter key so submit the sign in request here
+                System.out.println(usernameField.getText());
+                User user = new User();
+                user.setUsername(usernameField.getText());
 
-                //this series will remove everything from the main panel and is a nice transition into next view
-                mainPanel.removeAll();
-                mainFrame.setContentPane(mainPanel);
-                mainFrame.setVisible(true);
+                if(mainMenuView == null) {
+
+                    mainMenuView = new MainMenuView(mainFrame, mainPanel, mainController, user);
+                }
+                mainController.renderView(mainMenuView);
+
             }
         });
     }
@@ -224,6 +235,13 @@ public class LoginView implements GameView {
             public void actionPerformed(ActionEvent e) {
                 System.out.println(e.getActionCommand());
                 //TODO -> this gets triggered when the user presses the enter key so submit the sign in request here
+
+                user.setPassword(new String(passwordField.getPassword()));
+
+                if(mainMenuView == null) {
+                    mainMenuView = new MainMenuView(mainFrame, mainPanel, mainController, user);
+                }
+                mainController.renderView(mainMenuView);
             }
         });
     }
