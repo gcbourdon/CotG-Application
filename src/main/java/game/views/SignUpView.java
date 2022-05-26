@@ -190,13 +190,13 @@ public class SignUpView implements GameView {
                 signUpPanel.removeAll();
                 signUpPanel.add(signUpLabel);
 
-                if(!usernameLongEnough(usernameField.getText())) {
-                    signUpPanel.add(getErrorLabel("username must be between 6-20 characters"));
+                if(!usernameWithinBounds(usernameField.getText())) {
+                    signUpPanel.add(getErrorLabel("username must be between 4-20 characters"));
                     signUpPanel.add(usernamePanel);
                     validAccount = false;
 
                 } else if(!validateUsername(usernameField.getText())) {
-                    signUpPanel.add(getErrorLabel("username can only contain alphanumeric characters"));
+                    signUpPanel.add(getErrorLabel("username can only contain alphanumeric characters and white space"));
                     signUpPanel.add(usernamePanel);
                     validAccount = false;
 
@@ -228,7 +228,7 @@ public class SignUpView implements GameView {
                     validAccount = false;
 
                 } else if(!validatePassword(new String(passwordField.getPassword()))) {
-                    signUpPanel.add(getErrorLabel("password must contain an upper and lower case character"));
+                    signUpPanel.add(getErrorLabel("password must contain an upper AND lower case character"));
                     signUpPanel.add(getErrorLabel("special characters include @$!%*?&#"));
                     signUpPanel.add(passwordPanel);
                     validAccount = false;
@@ -308,17 +308,17 @@ public class SignUpView implements GameView {
         return errorLabel;
     }
 
-    private boolean usernameLongEnough(String username) {
-        return username.length() >= 6;
+    private boolean usernameWithinBounds(String username) {
+        return ((username.length() >= 4) && (username.length() <= 20));
     }
 
     private boolean validateUsername(String username) {
         //username must have the following criteria:
-        //6-20 characters long
-        //must only contain alphabetical characters and alphanumeric values
+        //4-20 characters long
+        //must only contain alphanumeric values and white space
 
-        String regex = "^[a-zA-Z0-9]{6,20}$";
-        return username.matches(regex);
+        String alphanumeric = "^[a-zA-Z0-9\s]{4,20}$";
+        return username.matches(alphanumeric);
     }
 
     private boolean validateEmail(String email) {
